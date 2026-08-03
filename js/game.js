@@ -59,6 +59,24 @@ function draw() {
 
   drawSprite( ctx, 'paddle', paddle.x, paddle.y, paddle.width, paddle.height );
   drawSprite( ctx, 'ball', ball.x - ball.radius, ball.y - ball.radius, ball.radius * 2, ball.radius * 2 );
+
+  if ( gameState.status === 'playing' ) drawHUD();
+}
+
+function drawHUD() {
+  ctx.font = '20px sans-serif';
+  ctx.fillStyle = '#fff';
+  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 3;
+  ctx.textBaseline = 'top';
+
+  ctx.textAlign = 'left';
+  ctx.strokeText( `Puntuación: ${ gameState.score }`, 10, 10 );
+  ctx.fillText( `Puntuación: ${ gameState.score }`, 10, 10 );
+
+  ctx.textAlign = 'right';
+  ctx.strokeText( `Vidas: ${ gameState.lives }`, canvas.width - 10, 10 );
+  ctx.fillText( `Vidas: ${ gameState.lives }`, canvas.width - 10, 10 );
 }
 
 const keys = { ArrowLeft: false, ArrowRight: false };
