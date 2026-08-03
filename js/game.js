@@ -50,7 +50,8 @@ const gameState = {
 };
 
 function draw() {
-  ctx.clearRect( 0, 0, canvas.width, canvas.height );
+  ctx.fillStyle = '#333';
+  ctx.fillRect( 0, 0, canvas.width, canvas.height );
 
   blocks.forEach( block => {
     if ( !block.alive ) return;
