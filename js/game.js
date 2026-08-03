@@ -107,11 +107,24 @@ function playSound( audio ) {
   audio.play();
 }
 
+function resetPaddle() {
+  paddle.x = ( canvas.width - paddle.width ) / 2;
+}
+
 function resetBall() {
   ball.x = paddle.x + paddle.width / 2;
   ball.y = paddle.y - ball.radius - 1;
   ball.dx = 3;
   ball.dy = -3;
+}
+
+function loseLife() {
+  gameState.lives -= 1;
+  resetPaddle();
+  resetBall();
+  if ( gameState.lives <= 0 ) {
+    gameState.status = 'lost';
+  }
 }
 
 function collidesWithPaddle() {
@@ -174,7 +187,7 @@ function updateBall() {
   }
 
   if ( ball.y - ball.radius > canvas.height ) {
-    resetBall();
+    loseLife();
   }
 }
 
