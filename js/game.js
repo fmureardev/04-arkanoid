@@ -61,4 +61,35 @@ function draw() {
   drawSprite( ctx, 'ball', ball.x - ball.radius, ball.y - ball.radius, ball.radius * 2, ball.radius * 2 );
 }
 
-loadSpritesheet( draw );
+const keys = { ArrowLeft: false, ArrowRight: false };
+
+document.addEventListener( 'keydown', e => {
+  if ( e.key in keys ) keys[ e.key ] = true;
+} );
+
+document.addEventListener( 'keyup', e => {
+  if ( e.key in keys ) keys[ e.key ] = false;
+} );
+
+canvas.addEventListener( 'mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  paddle.x = clampPaddleX( mouseX - paddle.width / 2 );
+} );
+
+function clampPaddleX( x ) {
+  return Math.max( 0, Math.min( canvas.width - paddle.width, x ) );
+}
+
+function update() {
+  if ( keys.ArrowLeft ) paddle.x = clampPaddleX( paddle.x - paddle.speed );
+  if ( keys.ArrowRight ) paddle.x = clampPaddleX( paddle.x + paddle.speed );
+}
+
+function gameLoop() {
+  update();
+  draw();
+  requestAnimationFrame( gameLoop );
+}
+
+loadSpritesheet( gameLoop );
