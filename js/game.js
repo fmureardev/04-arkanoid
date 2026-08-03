@@ -82,6 +82,7 @@ function clampPaddleX( x ) {
 }
 
 const ballBounceSound = new Audio( 'assets/assets/sounds/ball-bounce.mp3' );
+const breakSound = new Audio( 'assets/assets/sounds/break-sound.mp3' );
 
 function playSound( audio ) {
   audio.currentTime = 0;
@@ -103,6 +104,32 @@ function collidesWithPaddle() {
     ball.x - ball.radius <= paddle.x + paddle.width;
 }
 
+function checkBlockCollision() {
+  for ( const block of blocks ) {
+    if ( !block.alive ) continue;
+
+    const closestX = Math.max( block.x, Math.min( ball.x, block.x + block.width ) );
+    const closestY = Math.max( block.y, Math.min( ball.y, block.y + block.height ) );
+    const distX = ball.x - closestX;
+    const distY = ball.y - closestY;
+
+    if ( distX * distX + distY * distY > ball.radius * ball.radius ) continue;
+
+    block.alive = false;
+    gameState.score += 10;
+    playSound( breakSound );
+
+    const overlapX = Math.min( ball.x + ball.radius - block.x, block.x + block.width - ( ball.x - ball.radius ) );
+    const overlapY = Math.min( ball.y + ball.radius - block.y, block.y + block.height - ( ball.y - ball.radius ) );
+    if ( overlapX < overlapY ) {
+      ball.dx = -ball.dx;
+    } else {
+      ball.dy = -ball.dy;
+    }
+    break;
+  }
+}
+
 function updateBall() {
   ball.x += ball.dx;
   ball.y += ball.dy;
@@ -119,6 +146,8 @@ function updateBall() {
     ball.y = ball.radius;
     ball.dy = -ball.dy;
   }
+
+  checkBlockCollision();
 
   if ( collidesWithPaddle() ) {
     ball.y = paddle.y - ball.radius;
