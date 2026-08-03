@@ -81,9 +81,40 @@ function clampPaddleX( x ) {
   return Math.max( 0, Math.min( canvas.width - paddle.width, x ) );
 }
 
+function resetBall() {
+  ball.x = paddle.x + paddle.width / 2;
+  ball.y = paddle.y - ball.radius - 1;
+  ball.dx = 3;
+  ball.dy = -3;
+}
+
+function updateBall() {
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+
+  if ( ball.x - ball.radius < 0 ) {
+    ball.x = ball.radius;
+    ball.dx = -ball.dx;
+  } else if ( ball.x + ball.radius > canvas.width ) {
+    ball.x = canvas.width - ball.radius;
+    ball.dx = -ball.dx;
+  }
+
+  if ( ball.y - ball.radius < 0 ) {
+    ball.y = ball.radius;
+    ball.dy = -ball.dy;
+  }
+
+  if ( ball.y - ball.radius > canvas.height ) {
+    resetBall();
+  }
+}
+
 function update() {
   if ( keys.ArrowLeft ) paddle.x = clampPaddleX( paddle.x - paddle.speed );
   if ( keys.ArrowRight ) paddle.x = clampPaddleX( paddle.x + paddle.speed );
+
+  updateBall();
 }
 
 function gameLoop() {
