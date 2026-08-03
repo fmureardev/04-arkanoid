@@ -1,6 +1,6 @@
 # 01 - MVP Jugable de Arkanoid
 
-**Estado:** Aprobado
+**Estado:** Implementado
 **Dependencias:** Ninguna (primera spec del proyecto)
 **Fecha:** 2026-07-26
 
@@ -77,18 +77,18 @@ No se introduce persistencia (localStorage, IndexedDB, etc.) en este MVP — tod
 
 ## Criterios de aceptación
 
-- [ ] Al cargar `index.html` el juego arranca automáticamente, sin pantalla de inicio, mostrando la pala, la bola y los 60 bloques (10 columnas x 6 filas) en un canvas de 800x600px.
-- [ ] La pala se mueve con las flechas de teclado izquierda/derecha.
-- [ ] La pala se mueve siguiendo la posición horizontal del ratón sobre el canvas.
-- [ ] La pala no puede salir de los límites del canvas por ningún método de control.
-- [ ] La bola se mueve a velocidad constante y rebota (ángulo espejo) contra las paredes laterales y el techo.
-- [ ] La bola rebota (ángulo espejo) al golpear la pala, reproduciendo `ball-bounce.mp3`.
-- [ ] Al golpear un bloque, este desaparece, la bola rebota, se suman 10 puntos al marcador y se reproduce `break-sound.mp3`.
-- [ ] La puntuación y las vidas restantes son visibles en pantalla en todo momento durante la partida.
-- [ ] Si la bola sale por el borde inferior sin tocar la pala, se resta 1 vida y se resetean la posición de la bola y la pala, manteniendo los bloques restantes.
-- [ ] Al llegar a 0 vidas, el juego muestra una pantalla/mensaje de "Game Over" con la puntuación final y detiene la partida.
-- [ ] Al destruir los 60 bloques, el juego muestra una pantalla/mensaje de victoria con la puntuación final y detiene la partida.
-- [ ] No se usa ningún framework, librería externa ni gestor de paquetes — solo HTML, CSS y JS puro, reutilizando `spritesheet.js` para el renderizado de sprites.
+- [x] Al cargar `index.html` el juego arranca automáticamente, sin pantalla de inicio, mostrando la pala, la bola y los 60 bloques (10 columnas x 6 filas) en un canvas de 800x600px.
+- [x] La pala se mueve con las flechas de teclado izquierda/derecha.
+- [x] La pala se mueve siguiendo la posición horizontal del ratón sobre el canvas.
+- [x] La pala no puede salir de los límites del canvas por ningún método de control.
+- [x] La bola se mueve a velocidad constante y rebota (ángulo espejo) contra las paredes laterales y el techo.
+- [x] La bola rebota (ángulo espejo) al golpear la pala, reproduciendo `ball-bounce.mp3`.
+- [x] Al golpear un bloque, este desaparece, la bola rebota, se suman 10 puntos al marcador y se reproduce `break-sound.mp3`.
+- [x] La puntuación y las vidas restantes son visibles en pantalla en todo momento durante la partida.
+- [x] Si la bola sale por el borde inferior sin tocar la pala, se resta 1 vida y se resetean la posición de la bola y la pala, manteniendo los bloques restantes.
+- [x] Al llegar a 0 vidas, el juego muestra una pantalla/mensaje de "Game Over" con la puntuación final y detiene la partida.
+- [x] Al destruir los 60 bloques, el juego muestra una pantalla/mensaje de victoria con la puntuación final y detiene la partida.
+- [x] No se usa ningún framework, librería externa ni gestor de paquetes — solo HTML, CSS y JS puro, reutilizando `spritesheet.js` para el renderizado de sprites.
 
 ## Decisiones tomadas y descartadas
 
