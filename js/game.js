@@ -43,6 +43,8 @@ function createBlocks() {
 
 const blocks = createBlocks();
 
+let activeExplosions = [];
+
 const gameState = {
   score: 0,
   lives: 3,
@@ -168,6 +170,15 @@ function checkBlockCollision() {
     block.alive = false;
     gameState.score += 10;
     playSound( breakSound );
+
+    activeExplosions.push( {
+      x: block.x,
+      y: block.y,
+      width: block.width,
+      height: block.height,
+      color: block.color,
+      startTime: performance.now(),
+    } );
 
     const overlapX = Math.min( ball.x + ball.radius - block.x, block.x + block.width - ( ball.x - ball.radius ) );
     const overlapY = Math.min( ball.y + ball.radius - block.y, block.y + block.height - ( ball.y - ball.radius ) );
