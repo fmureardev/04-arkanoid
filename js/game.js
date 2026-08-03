@@ -237,7 +237,14 @@ function updateBall() {
   }
 }
 
+function purgeExplosions() {
+  const now = performance.now();
+  activeExplosions = activeExplosions.filter( explosion => now - explosion.startTime < EXPLOSION_DURATION );
+}
+
 function update() {
+  purgeExplosions();
+
   if ( gameState.status !== 'playing' ) return;
 
   if ( keys.ArrowLeft ) paddle.x = clampPaddleX( paddle.x - paddle.speed );

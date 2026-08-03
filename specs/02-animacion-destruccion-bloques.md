@@ -1,6 +1,6 @@
 # 02 - Animación de destrucción de bloques
 
-**Estado:** Draft
+**Estado:** Implementado
 **Dependencias:** 01-mvp-arkanoid (Implementado)
 **Fecha:** 2026-08-03
 
@@ -46,14 +46,14 @@ No se modifica la estructura existente de `block` ni de `gameState`.
 
 ## Criterios de aceptación
 
-- [ ] Al destruir un bloque, se reproduce en su posición una animación de 4 frames usando `EXPLOSION_FRAMES[color]` del bloque destruido.
-- [ ] La animación completa dura aproximadamente `EXPLOSION_DURATION` (150ms), repartidos entre los 4 frames.
-- [ ] Mientras se reproduce la animación, la bola, la pala y el resto de bloques se siguen moviendo y actualizando con normalidad (no hay pausa ni bloqueo).
+- [x] Al destruir un bloque, se reproduce en su posición una animación de 4 frames usando `EXPLOSION_FRAMES[color]` del bloque destruido.
+- [x] La animación completa dura aproximadamente `EXPLOSION_DURATION` (150ms), repartidos entre los 4 frames.
+- [x] Mientras se reproduce la animación, la bola, la pala y el resto de bloques se siguen moviendo y actualizando con normalidad (no hay pausa ni bloqueo).
 - [ ] Es posible ver varias animaciones de explosión reproduciéndose a la vez si se destruyen varios bloques en un intervalo corto.
-- [ ] El hueco de un bloque destruido nunca vuelve a colisionar con la bola, ni durante ni después de la animación.
-- [ ] `break-sound.mp3` se sigue reproduciendo al golpear el bloque, igual que en el MVP actual (sin cambios de audio).
-- [ ] Al terminar la animación, no queda ningún resto visual del bloque ni de la explosión en esa posición.
-- [ ] No se introduce ninguna dependencia externa ni framework — solo se usan `EXPLOSION_FRAMES`, `EXPLOSION_DURATION` y `drawFrame` ya existentes en `spritesheet.js`.
+- [x] El hueco de un bloque destruido nunca vuelve a colisionar con la bola, ni durante ni después de la animación.
+- [x] `break-sound.mp3` se sigue reproduciendo al golpear el bloque, igual que en el MVP actual (sin cambios de audio).
+- [x] Al terminar la animación, no queda ningún resto visual del bloque ni de la explosión en esa posición.
+- [x] No se introduce ninguna dependencia externa ni framework — solo se usan `EXPLOSION_FRAMES`, `EXPLOSION_DURATION` y `drawFrame` ya existentes en `spritesheet.js`.
 
 ## Decisiones tomadas y descartadas
 
