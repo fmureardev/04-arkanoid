@@ -81,11 +81,26 @@ function clampPaddleX( x ) {
   return Math.max( 0, Math.min( canvas.width - paddle.width, x ) );
 }
 
+const ballBounceSound = new Audio( 'assets/assets/sounds/ball-bounce.mp3' );
+
+function playSound( audio ) {
+  audio.currentTime = 0;
+  audio.play();
+}
+
 function resetBall() {
   ball.x = paddle.x + paddle.width / 2;
   ball.y = paddle.y - ball.radius - 1;
   ball.dx = 3;
   ball.dy = -3;
+}
+
+function collidesWithPaddle() {
+  return ball.dy > 0 &&
+    ball.y + ball.radius >= paddle.y &&
+    ball.y - ball.radius <= paddle.y + paddle.height &&
+    ball.x + ball.radius >= paddle.x &&
+    ball.x - ball.radius <= paddle.x + paddle.width;
 }
 
 function updateBall() {
@@ -103,6 +118,12 @@ function updateBall() {
   if ( ball.y - ball.radius < 0 ) {
     ball.y = ball.radius;
     ball.dy = -ball.dy;
+  }
+
+  if ( collidesWithPaddle() ) {
+    ball.y = paddle.y - ball.radius;
+    ball.dy = -ball.dy;
+    playSound( ballBounceSound );
   }
 
   if ( ball.y - ball.radius > canvas.height ) {
