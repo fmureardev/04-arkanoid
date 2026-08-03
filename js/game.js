@@ -61,6 +61,24 @@ function draw() {
   drawSprite( ctx, 'ball', ball.x - ball.radius, ball.y - ball.radius, ball.radius * 2, ball.radius * 2 );
 
   if ( gameState.status === 'playing' ) drawHUD();
+  if ( gameState.status === 'won' || gameState.status === 'lost' ) drawEndOverlay();
+}
+
+function drawEndOverlay() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillRect( 0, 0, canvas.width, canvas.height );
+
+  const title = gameState.status === 'won' ? '¡Victoria!' : 'Game Over';
+
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  ctx.font = '48px sans-serif';
+  ctx.fillText( title, canvas.width / 2, canvas.height / 2 - 30 );
+
+  ctx.font = '24px sans-serif';
+  ctx.fillText( `Puntuación final: ${ gameState.score }`, canvas.width / 2, canvas.height / 2 + 30 );
 }
 
 function drawHUD() {
@@ -157,6 +175,10 @@ function checkBlockCollision() {
     } else {
       ball.dy = -ball.dy;
     }
+
+    if ( blocks.every( b => !b.alive ) ) {
+      gameState.status = 'won';
+    }
     break;
   }
 }
@@ -192,6 +214,8 @@ function updateBall() {
 }
 
 function update() {
+  if ( gameState.status !== 'playing' ) return;
+
   if ( keys.ArrowLeft ) paddle.x = clampPaddleX( paddle.x - paddle.speed );
   if ( keys.ArrowRight ) paddle.x = clampPaddleX( paddle.x + paddle.speed );
 
