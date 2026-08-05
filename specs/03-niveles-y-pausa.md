@@ -1,6 +1,6 @@
 # 03 - Niveles con progresión
 
-**Estado:** Aprobado
+**Estado:** Implementado
 **Dependencias:** 01-mvp-arkanoid (Implementado), 02-animacion-destruccion-bloques (Implementado)
 **Fecha:** 2026-08-03
 
