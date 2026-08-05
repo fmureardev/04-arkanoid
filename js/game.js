@@ -8,6 +8,36 @@ const BLOCK_WIDTH = 80;
 const BLOCK_HEIGHT = 30;
 const BLOCK_TOP_OFFSET = 50;
 
+const LEVELS = [
+  // Nivel 1: rejilla completa
+  [
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ true, true, true, true, true, true, true, true, true, true ],
+  ],
+  // Nivel 2: pirámide / triángulo invertido
+  [
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ false, true, true, true, true, true, true, true, true, false ],
+    [ false, false, true, true, true, true, true, true, false, false ],
+    [ false, false, false, true, true, true, true, false, false, false ],
+    [ false, false, false, false, true, true, false, false, false, false ],
+    [ false, false, false, false, false, false, false, false, false, false ],
+  ],
+  // Nivel 3: diamante
+  [
+    [ false, false, false, false, true, true, false, false, false, false ],
+    [ false, false, true, true, true, true, true, true, false, false ],
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ true, true, true, true, true, true, true, true, true, true ],
+    [ false, false, true, true, true, true, true, true, false, false ],
+    [ false, false, false, false, true, true, false, false, false, false ],
+  ],
+];
+
 const paddle = {
   x: ( canvas.width - 100 ) / 2,
   y: canvas.height - 40,
@@ -24,10 +54,12 @@ const ball = {
   dy: -3,
 };
 
-function createBlocks() {
+function createBlocks( level ) {
+  const pattern = LEVELS[ level - 1 ];
   const list = [];
   for ( let row = 0; row < BLOCK_ROWS; row++ ) {
     for ( let col = 0; col < BLOCK_COLS; col++ ) {
+      if ( !pattern[ row ][ col ] ) continue;
       list.push( {
         x: col * BLOCK_WIDTH,
         y: BLOCK_TOP_OFFSET + row * BLOCK_HEIGHT,
@@ -41,15 +73,16 @@ function createBlocks() {
   return list;
 }
 
-const blocks = createBlocks();
-
 let activeExplosions = [];
 
 const gameState = {
   score: 0,
   lives: 3,
   status: 'playing',
+  currentLevel: 1,
 };
+
+const blocks = createBlocks( gameState.currentLevel );
 
 function draw() {
   ctx.fillStyle = '#333';
