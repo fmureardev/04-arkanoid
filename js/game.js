@@ -46,12 +46,16 @@ const paddle = {
   speed: 8,
 };
 
+const BASE_BALL_DX = 3;
+const BASE_BALL_DY = -3;
+const LEVEL_SPEED_MULTIPLIER = 1.15;
+
 const ball = {
   x: paddle.x + paddle.width / 2,
   y: paddle.y - 8 - 1,
   radius: 8,
-  dx: 3,
-  dy: -3,
+  dx: BASE_BALL_DX,
+  dy: BASE_BALL_DY,
 };
 
 function createBlocks( level ) {
@@ -82,7 +86,7 @@ const gameState = {
   currentLevel: 1,
 };
 
-const blocks = createBlocks( gameState.currentLevel );
+let blocks = createBlocks( gameState.currentLevel );
 
 function draw() {
   ctx.fillStyle = '#333';
@@ -116,7 +120,7 @@ function drawEndOverlay() {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect( 0, 0, canvas.width, canvas.height );
 
-  const title = gameState.status === 'won' ? '¡Victoria!' : 'Game Over';
+  const title = gameState.status === 'won' ? 'Completaste el juego' : 'Game Over';
 
   ctx.fillStyle = '#fff';
   ctx.textAlign = 'center';
@@ -178,10 +182,18 @@ function resetPaddle() {
 }
 
 function resetBall() {
+  const speedMultiplier = Math.pow( LEVEL_SPEED_MULTIPLIER, gameState.currentLevel - 1 );
   ball.x = paddle.x + paddle.width / 2;
   ball.y = paddle.y - ball.radius - 1;
-  ball.dx = 3;
-  ball.dy = -3;
+  ball.dx = BASE_BALL_DX * speedMultiplier;
+  ball.dy = BASE_BALL_DY * speedMultiplier;
+}
+
+function advanceLevel() {
+  gameState.currentLevel += 1;
+  blocks = createBlocks( gameState.currentLevel );
+  resetPaddle();
+  resetBall();
 }
 
 function loseLife() {
@@ -234,7 +246,11 @@ function checkBlockCollision() {
     }
 
     if ( blocks.every( b => !b.alive ) ) {
-      gameState.status = 'won';
+      if ( gameState.currentLevel < 3 ) {
+        advanceLevel();
+      } else {
+        gameState.status = 'won';
+      }
     }
     break;
   }
