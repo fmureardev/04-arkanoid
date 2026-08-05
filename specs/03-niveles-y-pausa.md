@@ -1,6 +1,6 @@
 # 03 - Niveles con progresión
 
-**Estado:** Draft
+**Estado:** Aprobado
 **Dependencias:** 01-mvp-arkanoid (Implementado), 02-animacion-destruccion-bloques (Implementado)
 **Fecha:** 2026-08-03
 
@@ -72,21 +72,21 @@ No se introduce ningún campo adicional para la pausa más allá del valor `'pau
 
 ## Criterios de aceptación
 
-- [ ] El juego arranca en el nivel 1 con la rejilla completa de 60 bloques (10x6), igual que el MVP actual.
-- [ ] Al destruir todos los bloques del nivel 1, se avanza automáticamente al nivel 2 con el patrón de pirámide/triángulo invertido.
-- [ ] Al destruir todos los bloques del nivel 2, se avanza automáticamente al nivel 3 con el patrón de diamante.
-- [ ] La velocidad de la bola en el nivel 2 es un 15% mayor que en el nivel 1, y en el nivel 3 un 15% mayor que en el nivel 2 (compuesto, ≈32.25% mayor que el nivel 1).
-- [ ] Al cambiar de nivel, se muestra un overlay con el número de nivel alcanzado durante ~1.5s, durante el cual la bola y la pala no se mueven, y después el juego continúa solo sin necesidad de pulsar nada.
-- [ ] Las vidas y la puntuación no se resetean al cambiar de nivel; se mantienen acumuladas de principio a fin.
-- [ ] Al cambiar de nivel, la posición de la bola y de la pala se resetean a sus posiciones iniciales, con la nueva velocidad correspondiente al nivel.
-- [ ] Al destruir todos los bloques del nivel 3, se muestra una pantalla con el texto "Completaste el juego" y la puntuación final acumulada, deteniendo la partida.
-- [ ] Perder todas las vidas en cualquier nivel (1, 2 o 3) sigue mostrando la pantalla de "Game Over" con la puntuación final, igual que en el MVP.
-- [ ] Los colores de los bloques se siguen asignando por fila de forma cíclica en los 3 niveles, sin colores fijos por nivel.
-- [ ] Recargar la página siempre reinicia el juego en el nivel 1 con 3 vidas y 0 puntos (sin persistencia de progreso).
-- [ ] Pulsar `p` durante la partida (`status === 'playing'`) pausa el juego: la bola y la pala dejan de moverse y se muestra un overlay de pausa.
-- [ ] Pulsar `p` de nuevo mientras está en pausa reanuda la partida exactamente donde estaba, sin resetear posiciones, vidas ni puntuación.
-- [ ] La tecla `p` no tiene ningún efecto durante el overlay de transición de nivel, ni en las pantallas de "Game Over" o "Completaste el juego".
-- [ ] No se introduce ninguna dependencia externa ni framework — solo HTML, CSS y JS puro.
+- [x] El juego arranca en el nivel 1 con la rejilla completa de 60 bloques (10x6), igual que el MVP actual.
+- [x] Al destruir todos los bloques del nivel 1, se avanza automáticamente al nivel 2 con el patrón de pirámide/triángulo invertido.
+- [x] Al destruir todos los bloques del nivel 2, se avanza automáticamente al nivel 3 con el patrón de diamante.
+- [x] La velocidad de la bola en el nivel 2 es un 15% mayor que en el nivel 1, y en el nivel 3 un 15% mayor que en el nivel 2 (compuesto, ≈32.25% mayor que el nivel 1).
+- [x] Al cambiar de nivel, se muestra un overlay con el número de nivel alcanzado durante ~1.5s, durante el cual la bola y la pala no se mueven, y después el juego continúa solo sin necesidad de pulsar nada.
+- [x] Las vidas y la puntuación no se resetean al cambiar de nivel; se mantienen acumuladas de principio a fin.
+- [x] Al cambiar de nivel, la posición de la bola y de la pala se resetean a sus posiciones iniciales, con la nueva velocidad correspondiente al nivel.
+- [x] Al destruir todos los bloques del nivel 3, se muestra una pantalla con el texto "Completaste el juego" y la puntuación final acumulada, deteniendo la partida.
+- [x] Perder todas las vidas en cualquier nivel (1, 2 o 3) sigue mostrando la pantalla de "Game Over" con la puntuación final, igual que en el MVP.
+- [x] Los colores de los bloques se siguen asignando por fila de forma cíclica en los 3 niveles, sin colores fijos por nivel.
+- [x] Recargar la página siempre reinicia el juego en el nivel 1 con 3 vidas y 0 puntos (sin persistencia de progreso).
+- [x] Pulsar `p` durante la partida (`status === 'playing'`) pausa el juego: la bola y la pala dejan de moverse y se muestra un overlay de pausa.
+- [x] Pulsar `p` de nuevo mientras está en pausa reanuda la partida exactamente donde estaba, sin resetear posiciones, vidas ni puntuación.
+- [x] La tecla `p` no tiene ningún efecto durante el overlay de transición de nivel, ni en las pantallas de "Game Over" o "Completaste el juego".
+- [x] No se introduce ninguna dependencia externa ni framework — solo HTML, CSS y JS puro.
 
 ## Decisiones tomadas y descartadas
 
