@@ -108,6 +108,18 @@ function draw() {
   if ( gameState.status === 'playing' ) drawHUD();
   if ( gameState.status === 'won' || gameState.status === 'lost' ) drawEndOverlay();
   if ( gameState.status === 'levelTransition' ) drawLevelTransitionOverlay();
+  if ( gameState.status === 'paused' ) drawPauseOverlay();
+}
+
+function drawPauseOverlay() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.fillRect( 0, 0, canvas.width, canvas.height );
+
+  ctx.fillStyle = '#fff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = '48px sans-serif';
+  ctx.fillText( 'Pausa', canvas.width / 2, canvas.height / 2 );
 }
 
 function drawLevelTransitionOverlay() {
@@ -168,6 +180,14 @@ const keys = { ArrowLeft: false, ArrowRight: false };
 
 document.addEventListener( 'keydown', e => {
   if ( e.key in keys ) keys[ e.key ] = true;
+
+  if ( e.key === 'p' || e.key === 'P' ) {
+    if ( gameState.status === 'playing' ) {
+      gameState.status = 'paused';
+    } else if ( gameState.status === 'paused' ) {
+      gameState.status = 'playing';
+    }
+  }
 } );
 
 document.addEventListener( 'keyup', e => {
